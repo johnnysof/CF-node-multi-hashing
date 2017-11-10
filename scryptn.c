@@ -30,6 +30,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <inttypes.h>
 
 #include "scryptn.h"
 #include "sha256.h"
@@ -255,4 +256,3 @@ void scrypt_N_R_1_256(const char* input, char* output, uint32_t N, uint32_t R, u
 	scrypt_N_R_1_256_sp(input, output, scratchpad, N, R, len);
     free(scratchpad);
 }
-
