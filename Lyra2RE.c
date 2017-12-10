@@ -70,7 +70,7 @@ void lyra2re_hash(const char* input, char* output)
 	memcpy(output, hashA, 32);
 }
 
-void lyra2re2_hash2(const char* input, char* output)
+void lyra2re2_hash(const char* input, char* output)
 {
 	sph_blake256_context ctx_blake;
 	sph_cubehash256_context ctx_cubehash;

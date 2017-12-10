@@ -679,8 +679,6 @@ NAN_METHOD(whirlpoolx) {
 }
 
 NAN_METHOD(lyra2re) {
-    return THROW_ERROR_EXCEPTION("**dsdsf.");
-
     if (info.Length() < 1)
         return THROW_ERROR_EXCEPTION("You must provide one argument.");
 
@@ -698,8 +696,6 @@ NAN_METHOD(lyra2re) {
 }
 
 NAN_METHOD(lyra2re2) {
-    return THROW_ERROR_EXCEPTION("**dsdsf.");
-
     if (info.Length() < 1)
         return THROW_ERROR_EXCEPTION("You must provide one argument.");
 
