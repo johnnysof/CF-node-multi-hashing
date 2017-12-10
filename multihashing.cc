@@ -678,7 +678,43 @@ NAN_METHOD(whirlpoolx) {
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }
 
+NAN_METHOD(lyra2re) {
+    return THROW_ERROR_EXCEPTION("**dsdsf.");
 
+    if (info.Length() < 1)
+        return THROW_ERROR_EXCEPTION("You must provide one argument.");
+
+    Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
+
+    if(!Buffer::HasInstance(target))
+        return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    char *output = (char*) malloc(sizeof(char) * 32);
+
+    lyra2re_hash(input, output);
+
+   info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
+}
+
+NAN_METHOD(lyra2re2) {
+    return THROW_ERROR_EXCEPTION("**dsdsf.");
+
+    if (info.Length() < 1)
+        return THROW_ERROR_EXCEPTION("You must provide one argument.");
+
+    Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
+
+    if(!Buffer::HasInstance(target))
+        return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    char *output = (char*) malloc(sizeof(char) * 32);
+
+    lyra2re2_hash(input, output);
+
+   info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
+}
 
 NAN_METHOD(zr5) {
 
