@@ -697,7 +697,7 @@ NAN_METHOD(lyra2re) {
 }
 
 NAN_METHOD(lyra2re2) {
-    return THROW_ERROR_EXCEPTION("**test.");
+    abc
 
     if (info.Length() < 1)
         return THROW_ERROR_EXCEPTION("You must provide one argument.");
