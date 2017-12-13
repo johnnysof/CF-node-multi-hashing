@@ -796,16 +796,14 @@ NAN_MODULE_INIT(init) {
     Nan::Set(target, Nan::New("sha1").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(sha1)).ToLocalChecked());
     Nan::Set(target, Nan::New("x15").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(x15)).ToLocalChecked());
 	Nan::Set(target, Nan::New("fresh").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("whirlpoolx").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("zr5").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("ziftr").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("neoscrypt").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("yescrypt").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("lyra2re").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("lyra2re2").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("s3").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("dcrypt").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
-    Nan::Set(target, Nan::New("jh").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
+    Nan::Set(target, Nan::New("whirlpoolx").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(whirlpoolx)).ToLocalChecked());
+    Nan::Set(target, Nan::New("zr5").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(zr5)).ToLocalChecked());
+    Nan::Set(target, Nan::New("neoscrypt").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(neoscrypt)).ToLocalChecked());
+    Nan::Set(target, Nan::New("yescrypt").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(yescrypt)).ToLocalChecked());
+    Nan::Set(target, Nan::New("lyra2re").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(lyra2re)).ToLocalChecked());
+    Nan::Set(target, Nan::New("lyra2re2").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(lyra2re2)).ToLocalChecked());
+    Nan::Set(target, Nan::New("s3").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(s3)).ToLocalChecked());
+    Nan::Set(target, Nan::New("jh").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(jh)).ToLocalChecked());
 }
 
 NODE_MODULE(multihashing, init)
