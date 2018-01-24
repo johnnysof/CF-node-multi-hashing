@@ -132,10 +132,6 @@ NAN_METHOD(scrypt) {
 }
 
 NAN_METHOD(neoscrypt) {
-
-    if (info.Length() < 2)
-        return THROW_ERROR_EXCEPTION("You must provide two arguments.");
-
     Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
 
     if(!Buffer::HasInstance(target))
@@ -150,7 +146,6 @@ NAN_METHOD(neoscrypt) {
 
     info.GetReturnValue().Set(Nan::NewBuffer((char *) output, 32).ToLocalChecked());
 }
-
 
 NAN_METHOD(scryptn) {
 
