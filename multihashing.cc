@@ -132,6 +132,8 @@ NAN_METHOD(scrypt) {
 }
 
 NAN_METHOD(neoscrypt) {
+   if (info.Length() < 3)
+       return THROW_ERROR_EXCEPTION("You must provide buffer to hash, N value, and R value");
     Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
 
     if(!Buffer::HasInstance(target))
