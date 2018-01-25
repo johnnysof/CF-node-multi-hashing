@@ -137,12 +137,15 @@ NAN_METHOD(neoscrypt) {
     if(!Buffer::HasInstance(target))
         return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
 
-    unsigned char *input = (unsigned char *) Buffer::Data(target);
-    char *scratch = (char*) alloca(sizeof(char) * 32);
-    neoscrypt(input, (unsigned char *) scratch, 0);
+    uint32_t input_len = Buffer::Length(target);
 
+    if(input_len != 80)
+        return THROW_ERROR_EXCEPTION("Buffer length should be exactly 80 bytes.");
+
+    unsigned char *input = (unsigned char *) Buffer::Data(target);
     char *output = (char*) malloc(sizeof(char) * 32);
-    memcpy(output, scratch, sizeof(char) * 32);
+
+    neoscrypt(input, (unsigned char *) output, 0);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }
