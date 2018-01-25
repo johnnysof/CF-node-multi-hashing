@@ -1,6 +1,6 @@
 {
     "name": "multi-hashing",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "main": "multihashing",
     "author": {
         "name": "Matthew Little",
