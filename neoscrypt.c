@@ -2283,16 +2283,15 @@ void neoscrypt_blake2s(const void *input, const uint input_size,
  * prf_output_size must be <= prf_key_size; */
 void neoscrypt_fastkdf(const uchar *password, uint password_len,
   const uchar *salt, uint salt_len, uint N, uchar *output, uint output_len) {
-    const size_t stack_align = 0x40;
     const uint kdf_buf_size = FASTKDF_BUFFER_SIZE,
       prf_input_size = 64, prf_key_size = 32, prf_output_size = 32;
     uint bufptr, a, b, i, j;
     uchar *A, *B, *prf_input, *prf_key, *prf_output;
 
     /* Align and set up the buffers in stack */
-    uchar stack[2 * kdf_buf_size + prf_input_size + prf_key_size
-      + prf_output_size + stack_align];
-    A          = (uchar *) (((size_t)stack & ~(stack_align - 1)) + stack_align);
+    uchar __attribute__((aligned(0x40))) stack[2 * kdf_buf_size + prf_input_size + prf_key_size
+      + prf_output_size];
+    A          = stack;
     B          = &A[kdf_buf_size + prf_input_size];
     prf_output = &A[2 * kdf_buf_size + prf_input_size + prf_key_size];
 
@@ -2387,14 +2386,13 @@ static const uint blake2s_IV_P_XOR[8] = {
 /* Performance optimised FastKDF with BLAKE2s integrated */
 void neoscrypt_fastkdf_opt(const uchar *password, const uchar *salt,
   uchar *output, uint mode) {
-    const size_t stack_align = 0x40;
     uint bufptr, output_len, i, j;
     uchar *A, *B;
     uint *S;
 
     /* Align and set up the buffers in stack */
-    uchar stack[864 + stack_align];
-    A = (uchar *) (((size_t)stack & ~(stack_align - 1)) + stack_align);
+    uchar __attribute__((aligned(0x40))) stack[864];
+    A = stack;
     B = &A[320];
     S = (uint *) &A[608];
 
@@ -2579,7 +2577,6 @@ static void neoscrypt_blkmix(uint *X, uint *Y, uint r, uint mixmode) {
  *     11110 = N of 2147483648;
  *   profile bits 30 to 13 are reserved */
 void neoscrypt(const uchar *password, uchar *output, uint profile) {
-    const size_t stack_align = 0x40;
     uint N = 128, r = 2, dblmix = 1, mixmode = 0x14;
     uint kdf, i, j;
     uint *X, *Y, *Z, *V;
@@ -2596,9 +2593,9 @@ void neoscrypt(const uchar *password, uchar *output, uint profile) {
         r = (1 << ((profile >> 5) & 0x7));
     }
 
-    uchar stack[(N + 3) * r * 2 * BLOCK_SIZE + stack_align];
+    uchar __attribute__((aligned(0x40))) stack[(N + 3) * r * 2 * BLOCK_SIZE];
     /* X = r * 2 * BLOCK_SIZE */
-    X = (uint *) (((size_t)stack & ~(stack_align - 1)) + stack_align);
+    X = stack;
     /* Z is a copy of X for ChaCha */
     Z = &X[32 * r];
     /* Y is an X sized temporal space */
@@ -2616,8 +2613,7 @@ void neoscrypt(const uchar *password, uchar *output, uint profile) {
 #ifdef OPT
             neoscrypt_fastkdf_opt(password, password, (uchar *) X, 0);
 #else
-            neoscrypt_fastkdf(password, 80, password, 80, 32,
-              (uchar *) X, r * 2 * BLOCK_SIZE);
+            neoscrypt_fastkdf(password, 80, password, 80, 32, (uchar *) X, r * 2 * BLOCK_SIZE);
 #endif
             break;
 
@@ -2988,12 +2984,11 @@ static const uint blake2s_IV_P_XOR_4way[32] = {
 
 /* 4-way BLAKE2s implementation */
 void neoscrypt_blake2s_4way(const uchar *input, const uchar *key, uchar *output) {
-    const size_t stack_align = 0x40;
     uint *T;
 
     /* Align and set up the buffer in stack */
-    uchar stack[704 + stack_align];
-    T = (uint *) (((size_t)stack & ~(stack_align - 1)) + stack_align);
+    uchar __attribute__((aligned(0x40))) stack[704];
+    T = stack;
 
     /* Initialise */
     neoscrypt_copy(&T[0], blake2s_IV_P_XOR_4way, 128);
