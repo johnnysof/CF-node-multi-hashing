@@ -72,13 +72,13 @@
                 "<!(node -e \"require('nan')\")"
             ],
             "cflags": [
-                "-D_GNU_SOURCE -fPIC -fno-inline -fno-default-inline -flto -fuse-linker-plugin -funswitch-loops -fpeel-loops"
+                "-D_GNU_SOURCE -fPIC -Ofast -flto -fuse-linker-plugin -funroll-loops -funswitch-loops -fpeel-loops"
             ],
             "cflags!": [
-                "-fno-inline", "-fno-default-inline", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
+                "-O2", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
             ],
             "ldflags": [
-                "-fPIC -flto -fuse-linker-plugin -fno-inline -fno-default-inline"
+                "-fPIC -Ofast -flto -fuse-linker-plugin"
             ],
             "cflags_cc": [
                 "-std=c++0x -march=native"
