@@ -132,16 +132,17 @@ NAN_METHOD(scrypt) {
 }
 
 NAN_METHOD(neoscrypt) {
-   if (info.Length() < 3)
-       return THROW_ERROR_EXCEPTION("You must provide buffer to hash, N value, and R value");
     Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
 
     if(!Buffer::HasInstance(target))
         return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
 
     unsigned char *input = (unsigned char *) Buffer::Data(target);
+    char *scratch = (char*) alloca(sizeof(char) * 32);
+    neoscrypt(input, (unsigned char *) scratch, 0);
+
     char *output = (char*) malloc(sizeof(char) * 32);
-    neoscrypt(input, (unsigned char *) output, 0);
+    memcpy(output, scratch, sizeof(char) * 32);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }
