@@ -66,9 +66,6 @@
                 "crypto/aesb.c",
                 "crypto/wild_keccak.cpp",
             ],
-            "defines": [
-                "OPT"
-            ],
             "include_dirs": [
                 "crypto",
                 "sha3",
