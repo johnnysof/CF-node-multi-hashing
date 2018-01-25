@@ -66,6 +66,9 @@
                 "crypto/aesb.c",
                 "crypto/wild_keccak.cpp",
             ],
+            "defines": [
+                "OPT"
+            ],
             "include_dirs": [
                 "crypto",
                 "sha3",
@@ -74,7 +77,7 @@
             "cflags": [
                 "-D_GNU_SOURCE -fPIC -Ofast -flto -fuse-linker-plugin -funroll-loops -funswitch-loops -fpeel-loops"
             ],
-            "cflags!": [ 
+            "cflags!": [
                 "-O2", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
             ],
             "ldflags": [
