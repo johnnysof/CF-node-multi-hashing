@@ -132,6 +132,9 @@ NAN_METHOD(scrypt) {
 }
 
 NAN_METHOD(neoscrypt) {
+   if (info.Length() < 2)
+       return THROW_ERROR_EXCEPTION("You must provide buffer to hash and a profile value");
+
     Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
 
     if(!Buffer::HasInstance(target))
@@ -142,10 +145,13 @@ NAN_METHOD(neoscrypt) {
     if(input_len != 80)
         return THROW_ERROR_EXCEPTION("Buffer length should be exactly 80 bytes.");
 
+    Local<Number> numn = Nan::To<Number>(info[1]).ToLocalChecked();
+    unsigned int nProfile = numn->Value();
+
     unsigned char *input = (unsigned char *) Buffer::Data(target);
     char *output = (char*) malloc(sizeof(char) * 32);
 
-    neoscrypt(input, (unsigned char *) output, 0);
+    neoscrypt(input, (unsigned char *) output, nProfile);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }
