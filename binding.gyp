@@ -73,13 +73,13 @@
                 "<!(node -e \"require('nan')\")"
             ],
             "cflags": [
-                "-D_GNU_SOURCE -fPIC -O3 -Wunused-const-variable -Wunused-private-field -Wunused-function"
+                "-D_GNU_SOURCE -fPIC -O3"
             ],
             "cflags!": [
-                "-O3 -fno-strict-aliasing -fno-tree-vrp -fno-omit-frame-pointer"
+                "-O3", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
             ],
             "ldflags": [
-                "-fPIC -Ofast -Wunused-const-variable -Wunused-private-field -Wunused-function"
+                "-fPIC -Ofast"
             ],
             "cflags_cc": [
                 "-std=c++0x -march=native"
