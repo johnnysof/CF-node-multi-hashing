@@ -76,7 +76,7 @@
                 "-D_GNU_SOURCE -fPIC -O3 -Wunused-const-variable -Wunused-private-field -Wunused-function"
             ],
             "cflags!": [
-                "-O3", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
+                "-O3 -fno-strict-aliasing -fno-tree-vrp -fno-omit-frame-pointer -Wunused-const-variable -Wunused-private-field -Wunused-function"
             ],
             "ldflags": [
                 "-fPIC -Ofast"
