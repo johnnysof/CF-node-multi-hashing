@@ -73,10 +73,10 @@
                 "<!(node -e \"require('nan')\")"
             ],
             "cflags": [
-                "-D_GNU_SOURCE -fPIC -Ofast -funroll-loops -funswitch-loops -fpeel-loops"
+                "-D_GNU_SOURCE -fPIC -O3"
             ],
             "cflags!": [
-                "-O2", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
+                "-O3", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
             ],
             "ldflags": [
                 "-fPIC -Ofast"
