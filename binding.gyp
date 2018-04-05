@@ -76,10 +76,10 @@
                 "-D_GNU_SOURCE -fPIC -O3 -Wunused-const-variable -Wunused-private-field -Wunused-function"
             ],
             "cflags!": [
-                "-O3 -fno-strict-aliasing -fno-tree-vrp -fno-omit-frame-pointer -Wunused-const-variable -Wunused-private-field -Wunused-function"
+                "-O3 -fno-strict-aliasing -fno-tree-vrp -fno-omit-frame-pointer"
             ],
             "ldflags": [
-                "-fPIC -Ofast"
+                "-fPIC -Ofast -Wunused-const-variable -Wunused-private-field -Wunused-function"
             ],
             "cflags_cc": [
                 "-std=c++0x -march=native"
