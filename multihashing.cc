@@ -28,6 +28,7 @@ extern "C" {
     #include "nist5.h"
     #include "sha1.h"
     #include "x15.h"
+    #include "x17.h"
     #include "fresh.h"
     #include "dcrypt.h"
     #include "jh.h"
@@ -607,7 +608,6 @@ NAN_METHOD(sha1) {
 }
 
 NAN_METHOD(x15) {
-
     if (info.Length() < 1)
         return THROW_ERROR_EXCEPTION("You must provide one argument.");
 
@@ -622,6 +622,25 @@ NAN_METHOD(x15) {
     uint32_t input_len = Buffer::Length(target);
 
     x15_hash(input, output, input_len);
+
+    info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
+}
+
+NAN_METHOD(x17) {
+    if (info.Length() < 1)
+        return THROW_ERROR_EXCEPTION("You must provide one argument.");
+
+    Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
+
+    if(!Buffer::HasInstance(target))
+        return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    char *output = (char*) malloc(sizeof(char) * 32);
+
+    uint32_t input_len = Buffer::Length(target);
+
+    x17_hash(input, output, input_len);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }
@@ -782,6 +801,7 @@ NAN_MODULE_INIT(init) {
     Nan::Set(target, Nan::New("nist5").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(nist5)).ToLocalChecked());
     Nan::Set(target, Nan::New("sha1").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(sha1)).ToLocalChecked());
     Nan::Set(target, Nan::New("x15").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(x15)).ToLocalChecked());
+    Nan::Set(target, Nan::New("x17").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(x17)).ToLocalChecked());
 	Nan::Set(target, Nan::New("fresh").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
     Nan::Set(target, Nan::New("whirlpoolx").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(whirlpoolx)).ToLocalChecked());
     Nan::Set(target, Nan::New("zr5").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(zr5)).ToLocalChecked());
