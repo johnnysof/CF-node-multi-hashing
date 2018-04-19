@@ -59,6 +59,7 @@
                 "sha3/sph_blake2s.c",
                 "sha3/sph_haval.c",
                 "sha3/sph_sha2.c",
+                "sha3/sph_sha2big.c",
                 "sha3/hamsi.c",
                 "crypto/oaes_lib.c",
                 "crypto/c_keccak.c",
